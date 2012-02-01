@@ -37,7 +37,7 @@ The million_complex.js caused 2µs per render addition.
 Usage (from demo.js)
 --------------------
 
-    var sys = require('sys');
+    var util = require('util');
     var Mu = require('./lib/mu');
 
     Mu.templateRoot = './examples';
@@ -59,7 +59,7 @@ Usage (from demo.js)
       var buffer = '';
 
       output.addListener('data', function (c) {buffer += c; })
-            .addListener('end', function () { sys.puts(buffer); });
+            .addListener('end', function () { util.puts(buffer); });
     });
     
 
@@ -72,7 +72,7 @@ Which yields:
 Using Mu.compileText
 --------------------
 
-    var sys = require('sys');
+    var util = require('util');
     var Mu = require('./lib/mu');
 
     var tmpl = "Hello {{> part}}. Your name is: {{name}}!";
@@ -80,7 +80,7 @@ Using Mu.compileText
     var compiled = Mu.compileText(tmpl, partials);
     
     compiled({name: "Chris"})
-      .addListener('data', function (c) { sys.puts(c) });
+      .addListener('data', function (c) { util.puts(c) });
 
 
 Mustache Documentation

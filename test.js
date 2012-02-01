@@ -1,4 +1,4 @@
-var sys = require('sys'),
+var util = require('util'),
     fs = require('fs'),
     assert = require('assert');
 var Mu = require('./lib/mu');
@@ -34,16 +34,16 @@ Mu.templateRoot = "./examples";
         compiled(js).addListener('data', function (c) { buffer += c; })
                     .addListener('end', function () {
                       assert.equal(buffer, text);
-                      sys.puts(name + ' passed');
+                      util.puts(name + ' passed');
                     });
       } catch (e) {
-        sys.puts("Error in template (render time): " + name);
-        sys.puts(e.stack);
+        util.puts("Error in template (render time): " + name);
+        util.puts(e.stack);
       }
     });
   } catch (e) {
-    sys.puts("Error in template (compile time): " + name);
-    sys.puts(e.stack);
+    util.puts("Error in template (compile time): " + name);
+    util.puts(e.stack);
   }
   
 });
@@ -58,7 +58,7 @@ Mu.templateRoot = "./examples";
   compiled({}).addListener('data', function (c) { buffer += c; })
               .addListener('end', function () {
                 assert.equal(buffer, "Hello World");
-                sys.puts('compileText passed');
+                util.puts('compileText passed');
               });
   
 }());

@@ -1,4 +1,4 @@
-var sys = require('sys')
+var util = require('util')
     fs = require('fs'),
     Path = require('path');
 var Mu = require('../lib/mu');
@@ -10,7 +10,7 @@ var js = fs.readFileSync(name + '.js');
 
 js = eval('(' + js + ')');
 
-sys.puts(name + '.html');
+util.puts(name + '.html');
 
 Mu.compile(name + '.html', function (err, compiled) {
   if (err) {
@@ -19,7 +19,7 @@ Mu.compile(name + '.html', function (err, compiled) {
   
   var buffer = '';
   compiled(js).addListener('data', function (c) { buffer += c; })
-              .addListener('end', function () { sys.puts(buffer); });
+              .addListener('end', function () { util.puts(buffer); });
 
   var i = 0;
   var d = new Date();
@@ -31,6 +31,6 @@ Mu.compile(name + '.html', function (err, compiled) {
   })();
 
   process.addListener('exit', function () {
-    sys.error("Time taken: " + ((new Date() - d) / 1000) + "secs");
+    util.error("Time taken: " + ((new Date() - d) / 1000) + "secs");
   });
 });

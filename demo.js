@@ -1,4 +1,4 @@
-var sys = require('sys');
+var util = require('util');
 var Mu = require('./lib/mu');
 
 Mu.templateRoot = './examples';
@@ -12,7 +12,7 @@ var ctx = {
   in_ca: true
 };
 
-sys.puts("Outputting examples/simple.html.mu with a chunkSize of 10\n");
+util.puts("Outputting examples/simple.html.mu with a chunkSize of 10\n");
 
 Mu.render('simple.html', ctx, {chunkSize: 10}, function (err, output) {
   if (err) {
@@ -23,11 +23,11 @@ Mu.render('simple.html', ctx, {chunkSize: 10}, function (err, output) {
   
   output
     .addListener('data', function (c) {
-      sys.print(c); // output chunk
+      util.print(c); // output chunk
       output.pause(); // pause for demo
       setTimeout(function () { // wait 500ms and resume for demo
         output.resume();
       }, 500);
     })
-    .addListener('end', function () { sys.puts("\n\nDONE"); });
+    .addListener('end', function () { util.puts("\n\nDONE"); });
 });
